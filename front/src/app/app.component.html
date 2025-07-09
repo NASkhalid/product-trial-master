@@ -6,7 +6,25 @@
         {{ title }}
     </div>
     <div class="p-toolbar-group-end">
-        <i class="pi pi-shopping-cart" style="font-size: 2rem"></i>
+        <div class="flex align-items-center gap-3">
+            <div class="relative">
+                <i class="pi pi-shopping-cart cursor-pointer" 
+                   style="font-size: 2rem"
+                   routerLink="/cart"></i>
+                <span *ngIf="cartCount() > 0" 
+                      class="cart-badge">{{ cartCount() }}</span>
+            </div>
+            
+            <p-button *ngIf="!isAuthenticated()" 
+                     label="Connexion" 
+                     routerLink="/login" 
+                     [text]="true" />
+            
+            <p-button *ngIf="isAuthenticated()" 
+                     label="Déconnexion" 
+                     (onClick)="logout()" 
+                     [text]="true" />
+        </div>
     </div>
 </p-toolbar>
 <p-splitter 
